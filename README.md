@@ -3,8 +3,8 @@
 Python script to generate Japanese calendars with holidays and open it in a default web browser.
 
 # requirements
-Python3.6 or later
-jpholiday
+- Python3.6 or later
+- jpholiday
 
 # usage
 `python calen.py`
