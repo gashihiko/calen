@@ -2,6 +2,7 @@ import calendar
 from datetime import date, timedelta
 import jpholiday
 import os
+import sys
 import re
 import webbrowser
 
@@ -25,7 +26,11 @@ calendar.LocaleHTMLCalendar.cssclasses = [
     "mon text-bold", "tue", "wed", "thu", "fri", "sat blue", "sun red"
 ]
 calendar.LocaleHTMLCalendar.cssclass_month_head = 'month_head'
-calendar_html = calendar.LocaleHTMLCalendar(firstweekday=6, locale='ja_JP')
+if sys.platform == 'win32':
+    locale = 'ja_JP'
+else:
+    locale = 'ja_JP.UTF-8'
+calendar_html = calendar.LocaleHTMLCalendar(firstweekday=6, locale=locale)
 
 document = '''
 <html>
@@ -56,4 +61,4 @@ document += '</body></html>'
 with open('calen.html', 'w', encoding='utf-8') as f:
     f.write(document)
 
-webbrowser.open('file:///' + os.path.realpath('calen.html'))
+webbrowser.open(os.path.realpath('calen.html'))
