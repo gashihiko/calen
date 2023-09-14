@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import calendar
 from datetime import date, timedelta
 import jpholiday
@@ -5,6 +6,7 @@ import os
 import sys
 import re
 import webbrowser
+import os
 
 
 def get_last_date(dt):
@@ -32,11 +34,13 @@ else:
     locale = 'ja_JP.UTF-8'
 calendar_html = calendar.LocaleHTMLCalendar(firstweekday=6, locale=locale)
 
-document = '''
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+document = f'''
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="calen.css" />
+<link rel="stylesheet" type="text/css" href="{script_dir}/calen.css" />
 <title>Calendar for 2023</title>
 </head>
 <body>
