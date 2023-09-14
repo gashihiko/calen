@@ -6,7 +6,7 @@ import os
 import sys
 import re
 import webbrowser
-import os
+from pathlib import Path
 
 
 def get_last_date(dt):
@@ -34,13 +34,15 @@ else:
     locale = 'ja_JP.UTF-8'
 calendar_html = calendar.LocaleHTMLCalendar(firstweekday=6, locale=locale)
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
+SCRIPT_DIR = Path(__file__).resolve().parent
+CSS_PATH = str(SCRIPT_DIR / 'calen.css')
+HTML_PATH = str(SCRIPT_DIR / 'calen.html')
 
 document = f'''
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="{script_dir}/calen.css" />
+<link rel="stylesheet" type="text/css" href="{CSS_PATH}" />
 <title>Calendar for 2023</title>
 </head>
 <body>
@@ -62,7 +64,7 @@ for year, month in month_year_iter(since.month, since.year, until.month, until.y
 
 document += '</body></html>'
 
-with open('calen.html', 'w', encoding='utf-8') as f:
+with open(HTML_PATH, 'w', encoding='utf-8') as f:
     f.write(document)
 
-webbrowser.open(os.path.realpath('calen.html'))
+webbrowser.open(HTML_PATH)
